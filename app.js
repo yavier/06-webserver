@@ -7,18 +7,8 @@ const port = 8080;
 
 app.use( express.static('public'))
 
-
-
-app.get('/', function (req, res) {
-  res.send('Home page')
-})
-
-app.get('/holamundo', function (req, res) {
-  res.send('Hello World correctly')
-})
-
-app.get('*', function (req, res) {
-  res.sendFile(__dirname + '/public/404.html')
+app.get('/generic', (req, res) => {
+  res.sendFile(__dirname + '/public/generic.html')
 })
 
 app.listen(port, () => {
