@@ -1,11 +1,15 @@
 
 const express = require('express')
 const app = express()
-const port = 8080;
+const hbs = require('hbs');
+require('dotenv').config();
+
+const port = process.env.PORT;
 
 //servir contenido estatico
-
+//Handlebars
 app.set('view engine', 'hbs')
+hbs.registerPartials(__dirname + '/views/partials');
 
 app.use( express.static('public'))
 
@@ -16,10 +20,21 @@ app.get('/', (req, res) => {
   })
 })
 
-
 app.get('/generic', (req, res) => {
-  res.sendFile(__dirname + '/public/generic.html')
+  res.render('generic', {
+    nombre: 'Francisco Garcia',
+    titulo: 'Curso node'
+  })
 })
+
+
+app.get('/elements', (req, res) => {
+  res.render('elements', {
+    nombre: 'Francisco Garcia',
+    titulo: 'Curso node'
+  })
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
